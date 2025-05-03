@@ -19,9 +19,11 @@ schema_view = get_schema_view(
     public=True,
     permission_classes=(permissions.AllowAny,),
 )
-
+def index(request):
+    return HttpResponse("Hello from Django on Lambda!")
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', index),
     re_path(r'^$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('api/v1/products/all/', AllProductsView.as_view(), name='all_products'),
     path('api/v1/products/', ProductView.as_view(), name='product'),
